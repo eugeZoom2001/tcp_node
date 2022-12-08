@@ -1,0 +1,14 @@
+{
+  "name": "tcp-node",
+  "version": "1.0.0",
+  "description": "Web MundoJJ node mongo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "eugenio pazos",
+  "license": "ISC",
+  "dependencies": {}
+}

@@ -1,0 +1,6 @@
+https://github.com/vondraussen/gt06#readme
+
+
+// get more info about the protocol from:
+// https://www.traccar.org/protocols/
+// https://www.traccar.org/protocol/5023-gt06/20170830%20Communication%20Protocol%20of%20JC100.pdf
