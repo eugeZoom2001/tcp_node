@@ -1,11 +1,47 @@
 const Gt06 = require("./gt06");
 const net = require("net");
-const port = 10000;
-//const host = "157.230.225.243";
-const host = "127.0.0.1";
+const PORT = 10000;
+const PORT_MAIN = 10500;
+const HOST = "127.0.0.1";
+
+var client = new net.Socket();
+// client.connect(PORT_MAIN, HOST, function () {
+//   console.log("CONNECTED TO: " + HOST + ":" + PORT_MAIN);
+//   // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
+//   console.log("envio mensaje ----:");
+//   const message = {
+//     name: "euge",
+//     edad: 50,
+//     grado: "aprendiendo",
+//   };
+//   client.write(JSON.stringify(message));
+// });
+
+client.on("close", function () {
+  console.log("Connection closed");
+});
+
+function send_data(client, data) {
+  client.connect(PORT_MAIN, HOST, function () {
+    console.log("CONNECTED TO: " + HOST + ":" + PORT_MAIN);
+    // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
+    console.log("envio mensaje ----:");
+    const message = {
+      name: "euge",
+      edad: 50,
+      grado: "aprendiendo",
+    };
+    client.write(data);
+  });
+
+  client.on("close", function () {
+    console.log("Connection closed");
+  });
+}
+
 const server = net.createServer();
-server.listen(port, host, () => {
-  console.log("TCP Server is running on port " + port + ".");
+server.listen(PORT, HOST, () => {
+  console.log("TCP Server is running on port " + PORT + ".");
 });
 
 let sockets = [];
@@ -23,12 +59,14 @@ server.on("connection", function (sock) {
       sock.write(gt06.responseMsg);
     }
 
-    // console.log(sock.imei);
+    // console.log(gt06.msgBuffer[0]);
+    // console.log("lat", gt06.msgBuffer[0].lat); //ok
 
     gt06.msgBuffer.forEach((msg) => {
       console.log(msg);
     });
-
+    send_data(client, JSON.stringify(gt06.msgBuffer[0]));
+    //console.log("string", JSON.stringify(gt06.msgBuffer[0]));
     gt06.clearMsgBuffer();
     console.log("------------------- fin ---------------------------------");
 
