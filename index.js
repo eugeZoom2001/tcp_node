@@ -5,17 +5,6 @@ const PORT_MAIN = 10500;
 const HOST = "127.0.0.1";
 
 var client = new net.Socket();
-// client.connect(PORT_MAIN, HOST, function () {
-//   console.log("CONNECTED TO: " + HOST + ":" + PORT_MAIN);
-//   // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client
-//   console.log("envio mensaje ----:");
-//   const message = {
-//     name: "euge",
-//     edad: 50,
-//     grado: "aprendiendo",
-//   };
-//   client.write(JSON.stringify(message));
-// });
 
 client.on("close", function () {
   console.log("Connection closed");
